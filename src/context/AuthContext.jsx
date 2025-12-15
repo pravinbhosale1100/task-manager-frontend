@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { decodeToken } from "../utils/jwtUtils";
 
 export const AuthContext = createContext();
 
@@ -15,7 +16,13 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if(token){
-      setUser({isAuthenticated:true});
+      const decodedUser = decodeToken(token);
+      setUser({
+    userName:
+      decodedUser?.["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
+    role:
+      decodedUser?.["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
+  });
     }
   },[]);
 
@@ -27,8 +34,15 @@ export function AuthProvider({ children }) {
   
   const login = (token) => {
     localStorage.setItem("token", token);
-    setUser({isAuthenticated:true});
-  }
+    const decodedUser = decodeToken(token);
+
+    setUser({
+    userName:
+      decodedUser?.["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
+    role:
+      decodedUser?.["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
+  });
+  };
 
   // const logout = () => {
   //   localStorage.removeItem("token");

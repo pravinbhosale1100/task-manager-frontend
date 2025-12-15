@@ -13,7 +13,11 @@ export default function Login() {
   })
 
   const [error, setError] = useState("");
-
+  const registerUser = async(e) =>{
+      e.preventDefault();
+      setError("");
+      navigate("/register",{replace:true})
+  };
   const handleSubmit = async(e) => {
     e.preventDefault();
     setError("");
@@ -54,6 +58,7 @@ export default function Login() {
         <br />
 
         <button type="submit">Login</button>
+        <button onClick={registerUser}>Go To Register</button>
       </form>
     </div>
   );
