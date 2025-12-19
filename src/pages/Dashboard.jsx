@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { isAdmin, isUser } from "../utils/roleUtils";
+import { Link } from "react-router-dom";
 
 
 export default function Dashboard() {
@@ -27,8 +28,8 @@ export default function Dashboard() {
                 <div>
                     <h3>Admin Panel</h3>
                     <ul>
-                        <li>View All Tasks</li>
-                        <li>Create Task</li>
+                        <li><Link to="/tasks">View all task</Link></li>
+                        <li><Link to="/tasks/create">Create Task</Link></li>
                         <li>Delete Any Task</li>
                         <li>Manage Users</li>
                     </ul>
@@ -39,7 +40,7 @@ export default function Dashboard() {
                 <div>
                     <h3>User Panel</h3>
                     <ul>
-                        <li>View My Tasks</li>
+                        <li><Link to="/tasks">My Tasks</Link></li>
                         <li>Update My Tasks</li>
                         <li>Add Comments</li>
                     </ul>
